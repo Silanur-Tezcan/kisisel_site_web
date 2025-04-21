@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block page_title %}Anasayfa{% endblock page_title %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+{% block content %}<!--TANITIM KISMI-->
+
+<div class="container-text">
+    <h2>{{ hakkimda.baslik }}</h2>
+    <p>{{ hakkimda.aciklama|linebreaks }}</p>
+    {% if hakkimda.cv_pdf %}
+        <a href="{{ hakkimda.cv_pdf.url }}" target="_blank" class="btn btn-primary mt-2">Güncel CV</a>
+    {% endif %}
+</div>
+
+<br><br>
+
+
+  <div class="container1 hidden">
+    <!-- Kategoriler için Swiper -->
+    <div class="row">
+        <div class="col-12 text-center">
+            {% if kategoriler %}
+                <div class="swiper mySwiper mt-5 position-relative">
+                    <!-- Swiper Wrapper for Categories -->
+                    <div class="swiper-wrapper">
+                        {% for kategori in kategoriler %}
+                            <div class="swiper-slide">
+                                <button type="button" class="btn btn-primary  kategori-btn"
+                                    data-kategori-id="{{ kategori.id }}">
+                                    {{ kategori.kategori }}
+                                </button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Sertifikalar Gösterim Alanı -->
+    <div class="container2 mt-2" id="kurslar-container">
+        {% include 'partials/_sertifika.html' %}
+    </div>
+</div>
+<br><br><br><br><br><br><br>{% endblock content %}
+<!-- JavaScript Dosyası Ekleniyor -->
+{% block script.js %}
+  <script src="{% static 'js/index.js' %}"></script>
+{% endblock script.js %}

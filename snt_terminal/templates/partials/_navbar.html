@@ -1,0 +1,51 @@
+{% load static %}
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'courses/css/style.css' %}">
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+{% endblock css_files %}
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+    <div class="container-fluid px-5">
+        <img src="{% static 'img/logo2.png' %}" style="border-radius:50%; width: 35px; height:35px;" alt="Logo" class="logo">
+      <a href="#" class="navbar-brand mx-2">SILA NUR TEZCAN </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
+         <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbar">
+          <ul class="navbar-nav me-auto">
+              <li class="nav-item mx-2">
+                  <a class="nav-link text-light" href="{% url 'anasayfa' %}">Anasayfa</a>
+              </li>
+              <li class="nav-item mx-2">
+                  <a class="nav-link text-light" href="{% url 'proje' %}">Projeler</a>
+              </li>
+              <li class="nav-item mx-2">
+                  <a class="nav-link text-light" href="{% url 'iletisim'%}">İletişim</a>
+              </li>
+            
+          </ul>
+          <ul class="navbar-nav me-1 justify-content-end">
+            {% if user.is_authenticated and user.userprofile.is_active %}
+            <li class="nav-item me-1">
+                <a class="nav-link" href="#">Hoş geldin, {{ user.username }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" href="">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link text-light" href="/admin">Giriş Yap</a>
+            </li>
+        
+            {% endif %}
+        </ul>
+        
+        <form method="get" action="{% url 'search' %}" class="d-flex align-items-center mx-4">
+            <input class="form-control me-2" type="text" name="q" placeholder="Anahtar Kelime" required>
+            <button class="btn btn-outline-light" type="submit">Arama</button>
+          </form>
+          
+      </div>
+  </div>
+</nav>

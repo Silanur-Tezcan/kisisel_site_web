@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block page_title %}İletişim{% endblock page_title %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/iletisim.css' %}">
+
+</head>
+
+{% block content %}
+
+<div class="content-container">
+  <div class="row">
+    <div class="col-6 icon">
+     <h2>İletişim Bilgileri</h2>
+     <p class="email"><a href="mailto:tzcn4868@gmail.com">e-mail:tzcn4868@gmail.com</a></p>
+     <div class="icons">
+       <a href="https://github.com/Silanur-Tezcan"><img  src="{% static 'img/github-sign.png' %}" alt="Ornek Resim"></a>
+       <a href="https://www.linkedin.com/in/s%C4%B1la-nur-tezcan-86b804326/"><img src="{% static 'img/linkedin-logo.png' %}" alt="Ornek Resim"></a>
+     </div>
+    </div>
+    <div class="col-6">
+      <h3 class="contact-title">Sizden Haber Almak Harika Olur!</h3>
+      <p class="contact-description">
+        Görüşleriniz, önerileriniz ya da potansiyel iş birlikleri için formu doldurmanız yeterli.
+        Ben buradayım, dinliyorum. 😊
+      </p>
+    
+      <form class="iletisim-form" method="POST" action="{% url 'iletisim' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="adSoyad" class="form-label">Ad Soyad</label>
+          <input type="text" class="form-control" id="adSoyad" name="ad_soyad" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">E-posta</label>
+          <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+          <label for="konu" class="form-label">Konu</label>
+          <input type="text" class="form-control" id="konu" name="konu" required>
+        </div>
+        <div class="mb-3">
+          <label for="mesaj" class="form-label">Mesaj</label>
+          <textarea class="form-control" id="mesaj" name="mesaj" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Gönder</button>
+      </form>
+    
+      {% if mesaj_gonderildi %}
+        <div class="alert alert-success mt-3">Mesajınız başarıyla gönderildi!</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block script.js %}
+  <script src="{% static 'js/index.js' %}"></script>
+{% endblock script.js %}

@@ -1,0 +1,326 @@
+/* Tüm elemanlar kutu modeli sınırlarını aşmasın */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Gövde stilini düzenle */
+body {
+    background-color: #E3F2FD;
+    font-family: Arial, sans-serif;
+ 
+    flex-direction: column;
+    align-items: center;
+}
+.navbar-custom{
+  background-color: #0D47A1;
+}
+/* Container sınıfı tüm içeriği ortalar ve genişlikleri sınırlar */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    padding: 20px;
+  
+}
+
+/* Görseller responsive olsun */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Metinler ve kutular ekran boyutuna göre uyumlu olsun */
+.responsive-box {
+    width: 100%;
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #f8f8f8;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .responsive-box {
+        padding: 15px;
+        font-size: 14px;
+    }
+
+    nav {
+        flex-direction: column!important;
+    }
+}
+.container-text {
+    display: flex;
+    justify-content: center; /* yatay ortalama */
+    align-items: center;     /* dikey ortalama */
+    height: 80%;           /* örnek yükseklik */
+    padding: 20px;
+    background-color: #4062a2  ;
+    box-shadow: 2px 3px 5px black;
+    border-radius: 5px;
+    flex-direction: column; /* alt alta sıralama */
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-style: italic;
+    font-weight: 300;
+}
+.container-text h2{
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: white!important;
+}
+.hidden {
+    opacity: 0;
+    transform: translateY(30px); /* Düşey kaydırma animasyonu */
+    transition: opacity 1s ease-out, transform 2s ease-out; /* Geçiş süresi ve şekli */
+  }
+  
+  /* Görünür hale gelen öğe */
+  .visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+/* Swiper button styles */
+.swiper-button-next, .swiper-button-prev {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    padding: 10px;
+  }
+  
+  .swiper-button-next:hover, .swiper-button-prev:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  .sertifika-container {
+    width: 100%;  /* Bu container'ı %100 genişlikte yapıyoruz */
+    padding: 20px 0;
+}
+.text-center .kategori-btn{
+  
+  color: white;
+  font-weight: 300;
+  width: 55%;
+  position: relative;
+  right: -35%;
+}
+.text-center .kategori-btn:hover{
+  background-color: #2c7eb9;
+  color: white;
+  font-weight: 300;
+  width: 55%;
+  
+}
+.card {
+    background: #4062a2bb;
+    color: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    height: 555px;
+    
+    width: 18rem!important;  /* Kartın %100 genişlikte olmasını sağlıyoruz */
+}
+.card:hover{
+  transform: scale(1.05);  /* Hover efekti ekledik */
+}
+.card .card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 9; /* Webkit tabanlı tarayıcılar için */
+  -webkit-box-orient: vertical;
+  line-clamp:10; /* Standart özelliği ekliyoruz (şu an tam desteklenmiyor) */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+.card .card-text:hover {
+  
+    overflow-y: scroll;
+}
+.card .card-text {
+  scrollbar-width: none; /* Firefox için */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+.card .card-text::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+.scroll-tip {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s ease, visibility 0.5s ease;
+}
+
+.scroll-tip.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+
+.sertifika-resim {
+    width: 100%;  /* Resmin genişliğini %100 yapıyoruz */
+    height: auto;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Swiper kapsayıcısının düzeni */
+.mySwiper {
+  display: flex !important;
+  justify-content: center !important; /* İçeriği yatayda ortalar */
+  align-items: center !important; /* İçeriği dikeyde ortalar */
+  width: 100% !important;
+  margin: 0 auto !important; /* Kapsayıcıyı ortalar */
+  padding: 0 10px !important; /* Kenarlardan boşluk bırakır */
+}
+
+/* Swiper slide'ları için */
+.mySwiper .swiper-slide {
+  display: flex !important;
+  justify-content: center !important; /* Yatayda ortalama */
+  align-items: center !important; /* Dikeyde ortalama */
+  text-align: center !important; /* Yazıları ortalar */
+  margin: 0 5px !important; /* Slide'lar arasındaki boşluk */
+}
+
+/* Telefon ve tablet modunda */
+@media (max-width: 768px) {
+  .mySwiper {
+    padding: 0 20px !important; /* Ekranın kenarlarından boşluk bırakır */
+  }
+  
+  .mySwiper .swiper-slide {
+    width: 100% !important; /* Her slide'ın genişliği tam olarak ekran genişliği kadar */
+    margin: 0 0 10px 0 !important; /* Slide'lar arasındaki boşluk */
+  }
+  .text-center .kategori-btn{
+    position: relative;
+    right: 5%;
+  }
+  .card{
+    position: relative;
+    right: -15%;
+  }
+}
+
+
+/* Modal */
+.modal {
+    display: none;  /* Başlangıçta gizli */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);  /* Arka planı koyulaştır */
+    display: flex;  /* Flex kullanarak ortalamayı sağla */
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Büyüyen Resim */
+  .modal-content {
+    max-width: 95%;  /* Ekranın %95'ine kadar büyüsün */
+    max-height: 90vh;  /* Ekranın %90'ına kadar büyüsün */
+    width: auto;  /* Genellikle genişlik orantılı büyür */
+    height: auto;  /* Boyut oranına göre yükseklik de ayarlanır */
+    border-radius: 10px;
+    object-fit: contain;  /* Resim oranlarını koruyarak içine sığar */
+  }
+  
+  /* Kapat Butonu */
+  .close {
+    position: absolute;
+    top: 30px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .close:hover {
+    color: #ccc;
+  }
+  
+  /* SEARCH */
+/* SEARCH */
+/* SEARCH */
+.search-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #4062a2bb;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: 0.3s ease;
+  width: 50%; /* Kartın genişliği %50 */
+  color: white;
+}
+
+.search-card:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  transform: scale(1.01);
+}
+
+.search-card-img-container {
+  width: 50%; /* Resim kısmı ekranın yarısını kaplar */
+}
+
+.search-card-img {
+  width: 100%; /* Resim, bulunduğu alanı tamamen kaplasın */
+  height: 100%; /* Yükseklik de tamamen kapsasın */
+  object-fit: cover; /* Resim kesilmesin ve kutuyu doldursun */
+}
+.search-card-img:hover{
+  cursor: pointer;
+}
+.search-card .card-body {
+  width: 50%; /* Yazı kısmı da ekranın yarısını kaplasın */
+  padding: 15px;
+}
+
+/* Responsive ayarları */
+@media (max-width: 767px) {
+  .search-card {
+    flex-direction: column; /* Mobilde kartı dikey yap */
+    width: 100%; /* Kartın genişliği mobilde %100 olacak */
+  }
+
+  .search-card-img-container {
+    width: 100%; /* Resim telefonlarda tam genişlikte olacak */
+    height: auto; /* Yüksekliği otomatik yap */
+  }
+
+  .search-card .card-body {
+    width: 100%; /* Yazılar da tam genişlikte olacak */
+    padding: 10px;
+  }
+}
+
+.search-card .card-body {
+  padding: 15px;
+  width: 50%; /* Yazı kısmı da ekranın yarısını kaplasın */
+}
+
+.search-card .card-title {
+  font-size: 1.2rem;
+}
+
+.search-card .card-text {
+  font-size: 1rem;
+}
+
+

@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block css_files %}
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+{% endblock css_files %}
+
+{% block content %}
+<h2 class="mb-4">Proje Arama Sonuçları</h2>
+
+{% if query %}
+  
+{% endif %}
+
+{% if projeler %}
+  <div class="row">
+    {% for proje in projeler %}
+      <div class="col-md-12 mb-4">
+        <div class="search-card d-flex flex-row align-items-center">
+          <div class="search-card-img-container">
+            <img src="{{ proje.resim.url }}" class="search-card-img" alt="{{ proje.baslik }}">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ proje.baslik }}</h5>
+            <p class="card-text">{{ proje.aciklama|truncatechars:200 }}</p>
+            <a href="{% url 'proje' %}" class="btn btn-primary mt-2">Detay</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="alert alert-warning">Sonuç bulunamadı.</div>
+{% endif %}
+
+<h2 class="mb-4">Sertifika Arama Sonuçları</h2>
+{% if sertifikalar %}
+  <div class="row">
+    {% for sertifika in sertifikalar %}
+      <div class="col-md-12 mb-4">
+        <div class="search-card d-flex flex-row align-items-center">
+          <div class="search-card-img-container">
+            <img src="{{ sertifika.resim.url }}" class="search-card-img" alt="{{ sertifika.baslik }}"  onclick="openModal(this)">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ sertifika.baslik }}</h5>
+            <p class="card-text">{{ sertifika.aciklama|truncatechars:200 }}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="alert alert-warning">Sonuç bulunamadı.</div>
+{% endif %}
+<!-- Modal (Büyütülmüş Resim) -->
+<div id="imageModal" class="modal" style="display:none;">
+  <span class="close" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="modalImage">
+</div>
+{% endblock %}
+{% block js_file %} <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+
+// Resmi büyütmek için
+function openModal(img) {
+  var modal = document.getElementById("imageModal");
+  var modalImg = document.getElementById("modalImage");
+  modal.style.display = "flex";  // Modal'ı aç
+  modalImg.src = img.src;  // Resmi modal içinde göster
+}
+
+// Modal'ı kapatmak için
+function closeModal() {
+  var modal = document.getElementById("imageModal");
+  modal.style.display = "none";  // Modal'ı gizle
+} </script> {% endblock js_file %}

@@ -1,0 +1,144 @@
+.content-container {
+    max-width: 1200px;
+
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+  
+  .content-container .col-6 {
+    flex: 1 1 45%;
+    background-color: #f8f8f8;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  @keyframes yukariAsagi {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-70px); }
+    100% { transform: translateY(0); }
+  }
+  
+  .icon {
+    animation: yukariAsagi 5s ease-in-out infinite;
+  }
+  .icon:hover {
+    animation-play-state: paused; /* hover olunca durur */
+  }
+  .content-container .icon {
+    background-color: #4062a2;
+    color: white;
+    height: 300px!important;
+    position: relative;
+    top: 10%;
+  }
+  
+  .content-container h2 {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #fff;
+    position: relative;
+    right: -25%;
+    top: 15%;
+  }
+  .contact-title {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: black!important;
+  }
+  .content-container .email a {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 300;
+    text-decoration: none;
+    margin-bottom: 15px;
+    display: inline-block;
+    position: absolute;
+    right: 30%;
+    top: 35%;
+  }
+  
+  .content-container .icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+    position: absolute;
+    right: 47%;
+    top: 45%;
+  }
+  
+  .content-container .icons img {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.3s ease;
+  }
+  
+  .content-container .icons img:hover {
+    transform: scale(1.1);
+  }
+  
+  .contact-description {
+    font-size: 15px;
+    color:black;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+  
+  .iletisim-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .iletisim-form .form-label {
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .iletisim-form .form-control,
+  .iletisim-form textarea {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+  
+  .iletisim-form button {
+    align-self: flex-start;
+    background-color: #4062a2;
+    border: none;
+    padding: 10px 25px;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .iletisim-form button:hover {
+    background-color: #5476b4;
+  }
+  
+  
+  /* Responsive için */
+  @media (max-width: 768px) {
+    .content-container {
+      flex-direction: column;
+      gap: 5px;
+    }
+  
+    .content-container .col-6 {
+      flex: 1 1 100%;
+    }
+  
+    .content-container .icons {
+      justify-content: center;
+    }
+    @keyframes yukariAsagi {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-50px); }
+      100% { transform: translateY(0); }
+    }
+  }
+  

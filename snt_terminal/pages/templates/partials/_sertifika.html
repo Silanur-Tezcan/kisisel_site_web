@@ -1,0 +1,88 @@
+{% load static %}
+
+{% block css_files %}
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+{% endblock css_files %}
+
+<!-- Swiper kapsayıcı -->
+<div class="swiper mySwiper1" id="kurslar-container">
+  <div class="swiper-wrapper">
+    {% if sertifikalar %}
+      {% for sertifika in sertifikalar %}
+        <div class="swiper-slide sertifika-container" data-kategori-id="{{ sertifika.kategori.id }}">
+          <div class="card">
+            <img src="{{ sertifika.resim.url }}" class="card-img-top sertifika-resim" alt="{{ sertifika.baslik }}" onclick="openModal(this)">
+            <div class="card-body">
+              <h5 class="card-title">{{ sertifika.baslik }}</h5>
+              <hr>
+              <p class="card-text">{{ sertifika.aciklama }}</p>
+              <hr>
+              <span class="scroll-tip">Devamı için▼</span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="swiper-slide text-center">
+        <p>Henüz sertifika eklenmemiştir.</p>
+      </div>
+    {% endif %}
+  </div>
+ 
+</div>
+<!-- Modal (Büyütülmüş Resim) -->
+<div id="imageModal" class="modal" style="display:none;">
+  <span class="close" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="modalImage">
+</div>
+
+{% block js_file %}
+  <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+  
+    function uyariGoster() {
+      alert("Lütfen satın alma işleminden önce ya da sonra kayıt olmayı unutmayın!");
+      return true; // false yaparsan linke gitmez, true olunca hem alert gösterir hem linke gider.
+    }
+
+  
+  document.addEventListener('DOMContentLoaded', function () {
+    var swiper = new Swiper(".mySwiper1", {
+      slidesPerView: 5,
+      spaceBetween: 30,
+      loop: true,
+    
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+        type: 'bullets',  // Bu satırı aktif tutma, alt noktalara neden olur.
+        hideOnClick: true  // Bu satırı ekleyerek, noktaların görünmesini engelleyebilirsiniz
+      },
+      breakpoints: {
+        1024: { slidesPerView: 3 },
+        768: { slidesPerView: 2 },
+        480: { slidesPerView: 1}
+      }
+    });
+  });
+// Resmi büyütmek için
+function openModal(img) {
+  var modal = document.getElementById("imageModal");
+  var modalImg = document.getElementById("modalImage");
+  modal.style.display = "flex";  // Modal'ı aç
+  modalImg.src = img.src;  // Resmi modal içinde göster
+}
+
+// Modal'ı kapatmak için
+function closeModal() {
+  var modal = document.getElementById("imageModal");
+  modal.style.display = "none";  // Modal'ı gizle
+}
+
+</script>
+
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock js_file %}

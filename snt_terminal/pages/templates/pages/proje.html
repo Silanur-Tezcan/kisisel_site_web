@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block page_title %}Projeler{% endblock page_title %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/iletisim.css' %}">
+  <link rel="stylesheet" href="{% static 'css/proje.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+  {% for proje in projeler %}
+    <div class="proje-card ">
+      <div class="image-grid">
+        {% for resim in proje.proje_resimleri.all %}
+          <div class="image-item">
+            <img src="{{ resim.resim.url }}" alt="Proje Resmi" onclick="openModal(this)">
+          </div>
+        {% endfor %}
+      </div>
+      <div class="text">
+        <h3>{{ proje.baslik }}</h3>
+        <p style="white-space: pre-line;">{{ proje.aciklama }}</p>
+      </div>
+      <div class="video-container">
+        <video width="100%" height="auto" controls>
+          <source src="{{ proje.video.url }}" type="video/mp4">
+          Tarayıcınız video etiketini desteklemiyor.
+        </video>
+      </div>
+      {% if proje.site_link %}
+      <div class="proje-link">
+        <a href="{{ proje.site_link }}" target="_blank" class="btn btn-primary">Projeyi İncele</a>
+      </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+
+  <!-- Modal (büyütülmüş resim kutusu) -->
+  <div id="imageModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+{% endblock content %}
+
+{% block extra_js %}
+  <script src="{% static 'js/index.js' %}"></script>
+{% endblock extra_js %}

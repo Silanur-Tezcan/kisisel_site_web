@@ -1,0 +1,133 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block css_files %}
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+{% endblock css_files %}
+
+{% block content %}
+<div class="container mt-5">
+  <form method="GET" action="{% url 'arama' %}" class="d-flex mb-4">
+    <input class="form-control me-2" type="search" placeholder="Ara..." name="q" value="{{ request.GET.q }}">
+    <button class="btn btn-outline-primary" type="submit">Ara</button>
+  </form>
+
+  {% if query %}
+    <h5 class="mb-4">“{{ query }}” için sonuçlar:</h5>
+
+    {% if projeler %}
+      <h6>Projeler</h6>
+      <ul class="list-group mb-3">
+        {% for proje in projeler %}
+          <li class="list-group-item">{{ proje.baslik }}</li>
+        {% endfor %}
+      </ul>
+
+      <!-- Proje Paginasyonu -->
+      <nav aria-label="Proje Sayfalama">
+        <ul class="pagination">
+          {% if projeler.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?q={{ query }}&page_proje=1">&laquo; İlk</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="?q={{ query }}&page_proje={{ projeler.previous_page_number }}">Önceki</a>
+            </li>
+          {% endif %}
+
+          {% for num in projeler.paginator.page_range %}
+            {% if projeler.number == num %}
+              <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+            {% else %}
+              <li class="page-item"><a class="page-link" href="?q={{ query }}&page_proje={{ num }}">{{ num }}</a></li>
+            {% endif %}
+          {% endfor %}
+
+          {% if projeler.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?q={{ query }}&page_proje={{ projeler.next_page_number }}">Sonraki</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="?q={{ query }}&page_proje={{ projeler.paginator.num_pages }}">Son &raquo;</a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    {% endif %}
+
+    {% if sertifikalar %}
+      <h6 class="mt-4">Sertifikalar</h6>
+      <ul class="list-group mb-3">
+        {% for sertifika in sertifikalar %}
+          <li class="list-group-item">{{ sertifika.baslik }}</li>
+        {% endfor %}
+      </ul>
+
+      <!-- Sertifika Paginasyonu -->
+      <nav aria-label="Sertifika Sayfalama">
+        <ul class="pagination">
+          {% if sertifikalar.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?q={{ query }}&page_sertifika=1">&laquo; İlk</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="?q={{ query }}&page_sertifika={{ sertifikalar.previous_page_number }}">Önceki</a>
+            </li>
+          {% endif %}
+
+          {% for num in sertifikalar.paginator.page_range %}
+            {% if sertifikalar.number == num %}
+              <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+            {% else %}
+              <li class="page-item"><a class="page-link" href="?q={{ query }}&page_sertifika={{ num }}">{{ num }}</a></li>
+            {% endif %}
+          {% endfor %}
+
+          {% if sertifikalar.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?q={{ query }}&page_sertifika={{ sertifikalar.next_page_number }}">Sonraki</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="?q={{ query }}&page_sertifika={{ sertifikalar.paginator.num_pages }}">Son &raquo;</a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    {% endif %}
+
+    {% if not projeler and not sertifikalar %}
+      <div class="alert alert-warning mt-3" role="alert">
+        Aradığınız kelimeyle eşleşen bir sonuç bulunamadı.
+      </div>
+    {% endif %}
+  {% endif %}
+</div>
+
+
+<!-- Modal (Büyütülmüş Resim) -->
+<div id="imageModal" class="modal">
+  <span class="close" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="modalImage">
+</div>
+{% endblock %}
+
+{% block js_file %}
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+  // Modal'ı açan fonksiyon
+  function openModal(imageElement) {
+    var modal = document.getElementById("imageModal");
+    var modalImg = document.getElementById("modalImage");
+    modal.style.display = "block"; // Modal'ı göster
+    modalImg.src = imageElement.src; // Modalda gösterilecek resmi ayarla
+  }
+
+  // Modal'ı kapatan fonksiyon
+  function closeModal() {
+    var modal = document.getElementById("imageModal");
+    modal.style.display = "none"; // Modal'ı gizle
+  }
+</script>
+{% endblock js_file %}
