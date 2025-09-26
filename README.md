@@ -8,7 +8,7 @@ Web siteme aşağıdaki bağlantı üzerinden ulaşabilirsiniz:
 
 🔗 [Canlı Demo Görüntüle](https://snt-cc9b.onrender.com/)
 
-> Not: Lütfen linki kendi Render bağlantınla değiştir 😊
+
 
 ## 💡 Genel Özellikler
 - Kullanıcı dostu modern ön yüz (HTML, CSS, JS)
